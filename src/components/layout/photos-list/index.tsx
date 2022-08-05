@@ -1,13 +1,15 @@
 import {FC} from 'react';
-import {Button, Grid, Typography} from '@mui/material';
+import {Typography} from '@mui/material';
 
 import usePhotosStore from '../../../store/usePhotosStore';
-
-import PhotoItem from '../../ui/photo-item';
 
 import {centerButtonStyles, limitStep} from './photos-list.constants';
 
 import styles from './photos-list.module.scss';
+import Grid from '../grid';
+import Button from '../../ui/button';
+import PhotoItem from '../../ui/photo-item';
+import {Photo} from '../../../utils/types/photos';
 
 const PhotosList: FC = () => {
 	const {photos, limit, setLimit, searchValue, filteredLength, total} = usePhotosStore();
@@ -16,14 +18,14 @@ const PhotosList: FC = () => {
 	
 	if (!photos.length) {
 		return (
-			<section data-testid='empty-photos' className={styles.list}>
+			<section data-testid="empty-photos" className={styles.list}>
 				<Typography variant="body1">
 					Photos by title{' '}
 					
 					<strong>{searchValue}</strong>
-				
-				{' '}were not found...
-			</Typography>
+					
+					{' '}were not found...
+				</Typography>
 			</section>
 		)
 	}
@@ -38,23 +40,14 @@ const PhotosList: FC = () => {
 				</Typography>
 			)}
 			
-			<Grid container spacing={{xs: 2, md: 3}} columns={{xs: 1, sm: 2, md: 3}} alignItems="stretch">
-				{photos.map(photo => (
-					<Grid item key={photo.id} md={1} sm={1} xs={1}>
-						<PhotoItem data={photo}/>
-					</Grid>
-				))}
-			</Grid>
+			<Grid
+				items={photos}
+				renderItem={(photo) => <PhotoItem data={photo} />}
+				keyExtractor={(photo) => photo.id}
+			/>
 			
 			{photos.length >= limit ? (
-				<Button
-					data-testid='show-more'
-					style={centerButtonStyles}
-					variant="contained"
-					onClick={onShowMoreClick}
-				>
-					Show More
-				</Button>
+				<Button title="Show More" onClick={onShowMoreClick}/>
 			) : null}
 		</section>
 	)

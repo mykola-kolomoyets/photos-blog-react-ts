@@ -39,16 +39,17 @@ module.exports = {
     'quote-props': 'off',
     quotes: ['warn', 'single'],
     'comma-dangle': ['warn', 'never'],
-    '@typescript-eslint/comma-dangle': [
-      'warn',
-      {
-        arrays: 'never',
-        objects: 'never',
-        imports: 'never',
-        exports: 'never',
-        functions: 'never'
-      }
-    ],
+    // '@typescript-eslint/comma-dangle': [
+    //   'warn',
+    //   {
+    //     arrays: 'never',
+    //     objects: 'never',
+    //     imports: 'never',
+    //     exports: 'never',
+    //     functions: 'never',
+    //     generics: 'never'
+    //   }
+    // ],
     'react/jsx-props-no-spreading': [
       0,
       {
@@ -63,7 +64,7 @@ module.exports = {
     'react/require-default-props': [
       0,
       { forbidDefaultForRequired: 0, ignoreFunctionalComponents: 0 }
-    ],
+    ]
   },
   settings: {
     react: {

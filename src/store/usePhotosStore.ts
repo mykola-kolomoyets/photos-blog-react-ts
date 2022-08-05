@@ -10,19 +10,26 @@ interface PhotosStore {
 	limit: number;
 	photos: Photo[];
 	isFetching: boolean;
+	searchValue: string;
+	total: number;
+	filteredLength: number;
 	
 	/**
 	 * Methods
 	 */
 	setLimit: (limit: number) => void;
+	setSearchValue: (searchValue: string) => void;
 	getPhotos: () => void;
-	searchPhotos: (searchValue: string) => void;
+	searchPhotos: () => void;
 }
 
-export const initialState: Omit<PhotosStore, 'setLimit' | 'getPhotos' | 'searchPhotos'> = {
+export const initialState: Omit<PhotosStore, 'setLimit' | 'getPhotos' | 'searchPhotos' | 'setSearchValue'> = {
 	limit: 6,
 	photos: [],
-	isFetching: false
+	isFetching: false,
+	searchValue: '',
+	total: 0,
+	filteredLength: 0
 }
 
 const usePhotosStore = createStore<PhotosStore>((set, get) => ({
@@ -32,34 +39,57 @@ const usePhotosStore = createStore<PhotosStore>((set, get) => ({
 		set({limit});
 	},
 	
+	setSearchValue: (searchValue) => {
+		set({searchValue});
+	},
+	
 	getPhotos: async () => {
 		const limit = get().limit;
 		
 		set({isFetching: true});
 		
 		PhotosService.getPhotos(limit)
-			.then(({data: photos}) => set({photos}))
+			.then(({data: photos}) => set({
+				photos,
+				total: photos.length,
+				filteredLength: photos.length
+			}))
 			.catch((err) => {
 				console.log(err);
 				
-				set({photos: []});
+				set({
+					photos: [],
+					total: 0,
+					filteredLength: 0
+				});
 			})
 			.finally(() => set({isFetching: false}));
 	},
 	
-	searchPhotos: (searchValue) => {
+	searchPhotos: () => {
 		set({isFetching: true});
+		
+		const {limit, searchValue} = get();
 		
 		PhotosService.getPhotos()
 			.then(({data}) => {
-				const filteredPhotos = data.filter(photo => photo.title.includes(searchValue.toLowerCase()));
+				const filteredPhotos = data
+					.filter(photo => photo.title.includes(searchValue.toLowerCase()));
 				
-				set({photos: filteredPhotos});
+				set({
+					photos: filteredPhotos.slice(0, limit),
+					total: data.length,
+					filteredLength: filteredPhotos.length
+				});
 			})
 			.catch(err => {
 				console.log(err);
 				
-				set({photos: []});
+				set({
+					photos: [],
+					total: 0,
+					filteredLength: 0
+				});
 			})
 			.finally(() => set({isFetching: false}));
 	}

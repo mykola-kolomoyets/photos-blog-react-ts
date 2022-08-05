@@ -1,10 +1,13 @@
 import React from 'react';
 
 import './App.scss';
+import Header from './components/layout/header';
 
 function App() {
 	return (
-		<h1>Hello world</h1>
+		<main>
+			<Header />
+		</main>
 	);
 }
 

@@ -1,0 +1,1 @@
+export const sliceString = (str: string, limit?: number) => `${str.slice(0, limit || 10)}...`;

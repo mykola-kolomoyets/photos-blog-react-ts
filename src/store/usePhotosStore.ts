@@ -7,21 +7,34 @@ interface PhotosStore {
 	/**
 	 * Fields
 	 */
+	limit: number;
 	photos: Photo[];
 	isFetching: boolean;
 	
 	/**
 	 * Methods
 	 */
-	getPhotos: (limit: number) => void;
+	setLimit: (limit: number) => void;
+	getPhotos: () => void;
 	searchPhotos: (searchValue: string) => void;
 }
 
-const usePhotosStore = createStore<PhotosStore>((set, get) => ({
+export const initialState: Omit<PhotosStore, 'setLimit' | 'getPhotos' | 'searchPhotos'> = {
+	limit: 6,
 	photos: [],
-	isFetching: false,
+	isFetching: false
+}
+
+const usePhotosStore = createStore<PhotosStore>((set, get) => ({
+	...initialState,
 	
-	getPhotos: async (limit) => {
+	setLimit: (limit) => {
+		set({limit});
+	},
+	
+	getPhotos: async () => {
+		const limit = get().limit;
+		
 		set({isFetching: true});
 		
 		PhotosService.getPhotos(limit)
@@ -51,3 +64,5 @@ const usePhotosStore = createStore<PhotosStore>((set, get) => ({
 			.finally(() => set({isFetching: false}));
 	}
 }));
+
+export default usePhotosStore;

@@ -38,7 +38,7 @@ const PhotoDetailsView: FC = () => {
 	}
 	
 	return (
-		<article>
+		<article data-testi='photo-details'>
 			<Grid container spacing={2} columns={{xs: 1, sm: 2}}>
 				<Grid item xs={1} sm={1}>
 					<Box

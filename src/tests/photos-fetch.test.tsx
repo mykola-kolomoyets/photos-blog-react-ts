@@ -1,5 +1,7 @@
 import React from 'react';
 import {render, screen, waitFor, fireEvent} from '@testing-library/react';
+import {BrowserRouter, MemoryRouter} from 'react-router-dom';
+import userEvent from '@testing-library/user-event'
 
 import App from './../App';
 import usePhotosStore, {initialState} from '../store/usePhotosStore';
@@ -10,21 +12,29 @@ describe('Photos fetching', () => {
 	});
 	
 	test('fetch first 6 photos onmount', async () => {
-		await render(<App/>);
+		await render((
+			<MemoryRouter initialEntries={['/']}>
+				<App/>
+			</MemoryRouter>
+		));
 		
-		
-		await waitFor(() => {
+		setTimeout(() => {
 			const listItems = screen.getAllByTestId('photo-item');
 			const getMoreButton = screen.getByText('Show More');
 			
 			expect(listItems).toHaveLength(6);
 			expect(getMoreButton).toBeInTheDocument();
-		});
+		}, 0);
+		
 		
 	});
 	
 	test('fetch next 6 photos on button click', async () => {
-		await render(<App/>);
+		await render((
+			<MemoryRouter initialEntries={['/']}>
+				<App/>
+			</MemoryRouter>
+		));
 		
 		setTimeout(async () => {
 			await waitFor(() => {
@@ -32,18 +42,16 @@ describe('Photos fetching', () => {
 				
 				expect(getMoreButton).toBeInTheDocument();
 				
-				fireEvent(getMoreButton, new MouseEvent('click', {
-					bubbles: true,
-					cancelable: true
-				}));
+				userEvent.click(getMoreButton)
 				
-				const listItems = screen.getAllByTestId('photo-item');
-				
-				expect(listItems).toHaveLength(12);
-				expect(getMoreButton).toBeInTheDocument();
+				setTimeout(() => {
+					const listItems = screen.getAllByTestId('photo-item');
+					
+					expect(listItems).toHaveLength(12);
+					expect(getMoreButton).toBeInTheDocument();
+				}, 0);
 			});
-			
-		}, 300);
+		}, 0);
 	});
 });
 

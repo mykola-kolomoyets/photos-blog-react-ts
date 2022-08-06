@@ -1,6 +1,7 @@
 import {FC, MouseEvent} from 'react';
-import {centerButtonStyles} from '../../layout/photos-list/photos-list.constants';
 import {Button} from '@mui/material';
+
+import {centerButtonStyles} from '../../layout/photos-list/photos-list.constants';
 
 type ButtonProps = {
 	title: string;
@@ -15,10 +16,10 @@ const ButtonComponent: FC<ButtonProps> = ({ title, onClick }) => {
 	
 	return (
 		<Button
-			data-testid='show-more'
-			style={centerButtonStyles}
 			variant="contained"
+			style={centerButtonStyles}
 			onClick={onButtonClick}
+			data-testid='show-more'
 		>
 			{title}
 		</Button>

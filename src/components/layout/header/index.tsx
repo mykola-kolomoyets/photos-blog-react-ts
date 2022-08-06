@@ -1,13 +1,14 @@
+import {FC} from 'react';
 import {useNavigate} from 'react-router-dom';
 import {IconButton, Typography, AppBar, Toolbar} from '@mui/material';
-import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import {grey} from '@mui/material/colors';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 
 import {photoDetailsViewRegex} from '../../../utils/regex';
 
 import styles from './header.module.scss';
 
-const Header = () => {
+const Header: FC = () => {
 	const navigate = useNavigate();
 	
 	const isOnPhotoDetailsView = photoDetailsViewRegex.test(window.location.href);
@@ -15,7 +16,7 @@ const Header = () => {
 	const onBackToPhotosListClick = () => navigate('/');
 	
 	return (
-		<AppBar position="sticky" sx={{ backgroundColor: grey['800'] }}>
+		<AppBar position="sticky" sx={{backgroundColor: grey['800']}}>
 			<Toolbar>
 				{isOnPhotoDetailsView && (
 					<IconButton
@@ -23,14 +24,13 @@ const Header = () => {
 						edge="start"
 						color="inherit"
 						aria-label="menu"
-						sx={{ mr: 2 }}
 						onClick={onBackToPhotosListClick}
 					>
-						<ArrowBackIcon />
+						<ArrowBackIcon/>
 					</IconButton>
 				)}
 				
-				<Typography className={styles.navbar} align="center" variant="h5">
+				<Typography className={styles.header} variant="h5" align="center">
 					PhotosBlog
 				</Typography>
 			

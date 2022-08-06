@@ -1,5 +1,5 @@
-import React, {FC, Fragment, useEffect, useMemo, useState} from 'react';
-import {CircularProgress, Typography} from '@mui/material';
+import React, {FC, Fragment, useEffect} from 'react';
+import {Typography} from '@mui/material';
 
 import usePhotosStore from '../../store/usePhotosStore';
 

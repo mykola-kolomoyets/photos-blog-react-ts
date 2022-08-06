@@ -1,16 +1,12 @@
 import {FC, useState} from 'react';
-
-import Card from '@mui/material/Card';
-import CardMedia from '@mui/material/CardMedia';
-import CardContent from '@mui/material/CardContent';
+import {Paper, Typography, Card, CardMedia, CardContent} from '@mui/material';
 
 import {Photo} from '../../../utils/types/photos';
 import {sliceString} from '../../../utils/functions';
-import {Paper, Typography} from '@mui/material';
 
 /**
- * Images URLs from jsonPlaceholder don`t load
- * correctly, so I added mock image to display it.
+ * ! Images URLs from jsonPlaceholder don`t load
+ * ! correctly, so I added mock image to display it.
  */
 import {mockImg} from './photo-item.constants';
 

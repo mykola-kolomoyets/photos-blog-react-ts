@@ -1,8 +1,10 @@
 import createStore from 'zustand';
 
-import {Photo, PhotoDetails} from '../utils/types/photos';
 import PhotosService from '../api/services/photos.service';
 import AlbumsService from '../api/services/albums.service';
+
+import {Photo, PhotoDetails} from '../utils/types/photos';
+import {sleep} from '../utils/functions';
 
 interface PhotosStore {
 	/**
@@ -71,7 +73,7 @@ const usePhotosStore = createStore<PhotosStore>((set, get) => ({
 					filteredLength: 0
 				});
 			})
-			.finally(() => set({isFetching: false}));
+			.finally(() => sleep(250).then(() => set({isFetching: false})));
 	},
 	
 	getPhoto: async (id) => {
@@ -94,7 +96,7 @@ const usePhotosStore = createStore<PhotosStore>((set, get) => ({
 				
 				set({chosenPhotoDetails: null})
 			})
-			.finally(() => set({isFetching: false}));
+			.finally(() => sleep(250).then(() => set({isFetching: false})));
 	},
 	
 	searchPhotos: () => {
@@ -124,7 +126,7 @@ const usePhotosStore = createStore<PhotosStore>((set, get) => ({
 					filteredLength: 0
 				});
 			})
-			.finally(() => set({isFetching: false}));
+			.finally(() => sleep(250).then(() => set({isFetching: false})));
 	}
 }));
 

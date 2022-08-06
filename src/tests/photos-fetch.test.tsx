@@ -1,10 +1,11 @@
 import React from 'react';
-import {render, screen, waitFor, fireEvent} from '@testing-library/react';
-import {BrowserRouter, MemoryRouter} from 'react-router-dom';
+import {render, screen, waitFor} from '@testing-library/react';
+import {MemoryRouter} from 'react-router-dom';
 import userEvent from '@testing-library/user-event'
 
-import App from './../App';
 import usePhotosStore, {initialState} from '../store/usePhotosStore';
+
+import App from './../App';
 
 describe('Photos fetching', () => {
 	beforeEach(() => {
@@ -25,8 +26,6 @@ describe('Photos fetching', () => {
 			expect(listItems).toHaveLength(6);
 			expect(getMoreButton).toBeInTheDocument();
 		}, 0);
-		
-		
 	});
 	
 	test('fetch next 6 photos on button click', async () => {

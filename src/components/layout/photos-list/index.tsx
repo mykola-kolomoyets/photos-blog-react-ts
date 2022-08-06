@@ -1,10 +1,11 @@
-import {FC, useEffect, useState, useMemo, memo} from 'react';
+import {FC, useMemo, memo} from 'react';
 import {useNavigate} from 'react-router-dom';
 import {Typography} from '@mui/material';
 
 import usePhotosStore from '../../../store/usePhotosStore';
 
 import Grid from '../grid';
+
 import Button from '../../ui/button';
 import PhotoItem from '../../ui/photo-item';
 
@@ -44,7 +45,6 @@ const PhotosList: FC = () => {
 			</section>
 		)
 	}
-	
 	
 	return (
 		<section className={styles.list}>

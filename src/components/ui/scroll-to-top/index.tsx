@@ -3,8 +3,9 @@ import {IconButton} from '@mui/material';
 import {ExpandLess} from '@mui/icons-material';
 import {Transition} from 'react-transition-group';
 
+import {duration, getStyles} from './scroll-to-top.constants';
+
 import styles from './scroll-to-top.module.scss';
-import {defaultStyle, duration, getStyles, transitionStyles} from './scroll-to-top.constants';
 
 type ScrollToTopProps = {
 	breakpoint: number;
@@ -12,16 +13,9 @@ type ScrollToTopProps = {
 const ScrollToTop: FC<ScrollToTopProps> = ({breakpoint}) => {
 	const [isShown, setIsShown] = useState(false);
 	
-	const onScroll = () => {
-		const offset = window.scrollY;
-		console.log(offset, breakpoint)
-		
-		setIsShown(offset > breakpoint * 1.5);
-	};
+	const onScroll = () => setIsShown(window.scrollY > breakpoint * 1.5);
 	
-	const onClick = () => {
-		window.scrollTo({top: 0, behavior: 'smooth'});
-	};
+	const onClick = () => window.scrollTo({top: 0, behavior: 'smooth'});
 	
 	useEffect(() => {
 		window.addEventListener('scroll', onScroll);

@@ -1,6 +1,6 @@
 import {FC, Fragment, useEffect} from 'react';
 import {useNavigate, useParams} from 'react-router-dom';
-import {Box, Card, CardContent, CardMedia, CircularProgress, Grid, Paper, Typography} from '@mui/material';
+import {Box, CircularProgress, Grid, Typography} from '@mui/material';
 
 import usePhotosStore from '../../store/usePhotosStore';
 
@@ -38,7 +38,7 @@ const PhotoDetailsView: FC = () => {
 	}
 	
 	return (
-		<article data-testi='photo-details'>
+		<article data-testid="photo-details">
 			<Grid container spacing={2} columns={{xs: 1, sm: 2}}>
 				<Grid item xs={1} sm={1}>
 					<Box
@@ -52,8 +52,8 @@ const PhotoDetailsView: FC = () => {
 					/>
 				</Grid>
 				
-				<Grid item xs={1} sm={1} sx={{ display: 'flex', alignItems: 'center' }}>
-					<Box >
+				<Grid item xs={1} sm={1} sx={{display: 'flex', alignItems: 'center'}}>
+					<Box>
 						<Typography component="div" variant="h5">
 							{chosenPhotoDetails?.title}
 						</Typography>

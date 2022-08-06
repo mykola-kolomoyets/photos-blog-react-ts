@@ -1,6 +1,12 @@
 import {Fragment} from 'react';
 import {Box, CircularProgress, Grid} from '@mui/material';
 
+import {
+	loadingBoxSX,
+	gridContainerLayout,
+	gridItemLayout
+} from './grid.constants';
+
 type GridProps<P> = {
 	items: P[];
 	renderItem: (item: P) => JSX.Element;
@@ -9,16 +15,16 @@ type GridProps<P> = {
 }
 const GridComponent = <P, >({items, renderItem, keyExtractor, isFetching}: GridProps<P>) => (
 	<Fragment>
-		<Grid container spacing={{xs: 2, md: 3}} columns={{xs: 1, sm: 2, md: 3}} alignItems="stretch">
+		<Grid container {...gridContainerLayout}>
 			{items.map((item) => (
-				<Grid item key={keyExtractor(item)} md={1} sm={1} xs={1}>
+				<Grid item key={keyExtractor(item)} {...gridItemLayout}>
 					{renderItem(item)}
 				</Grid>
 			))}
 		</Grid>
 		
 		{isFetching && (
-			<Box sx={{display: 'flex', justifyContent: 'center', padding: '16px'}}>
+			<Box sx={loadingBoxSX}>
 				<CircularProgress/>
 			</Box>
 		)}

@@ -1,5 +1,4 @@
 import {FC} from 'react';
-
 import {Container} from '@mui/material';
 
 import {WithChildren} from '../../../utils/types/layout';

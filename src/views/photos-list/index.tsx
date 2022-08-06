@@ -19,7 +19,7 @@ const PhotosListView: FC = () => {
 	
 	return (
 		<Fragment>
-			<Typography align="center" variant="h5">
+			<Typography align="center" variant="h5" sx={{marginBottom: '8px'}}>
 				Photos
 			</Typography>
 			

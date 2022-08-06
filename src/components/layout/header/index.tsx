@@ -30,7 +30,7 @@ const Header = () => {
 					</IconButton>
 				)}
 				
-				<Typography className={styles.navbar} align="center" variant="h4">
+				<Typography className={styles.navbar} align="center" variant="h5">
 					PhotosBlog
 				</Typography>
 			

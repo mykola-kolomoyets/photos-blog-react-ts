@@ -29,7 +29,7 @@ const PhotoItem: FC<PhotoItemProps> = ({data, onClick}) => (
 				// src={data.url}
 				image={mockImg}
 				src={mockImg}
-				height="150"
+				height={200}
 				alt={sliceString(data.title, 10)}
 			/>
 			

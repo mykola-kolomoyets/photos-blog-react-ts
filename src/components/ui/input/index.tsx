@@ -1,13 +1,14 @@
 import {ChangeEvent, FC, useEffect, useState, useTransition} from 'react';
-import {TextField} from '@mui/material';
+import {useMediaQuery, TextField, InputAdornment} from '@mui/material';
 
 import usePhotosStore from '../../../store/usePhotosStore';
 
 import useDebounce from '../../../utils/hooks/useDebounce';
 import {limitStep} from '../../layout/photos-list/photos-list.constants';
+import {Search} from '@mui/icons-material';
 
 const Input: FC = () => {
-	const { setLimit, setSearchValue } = usePhotosStore();
+	const {setLimit, setSearchValue} = usePhotosStore();
 	
 	const [isPending, startTransition] = useTransition();
 	
@@ -15,8 +16,10 @@ const Input: FC = () => {
 	
 	const searchValue = useDebounce(inputValue);
 	
+	const isTextFieldFullWidth = useMediaQuery('(max-width:900px)');
+	
 	const onSearchValueChange = (event: ChangeEvent<HTMLInputElement>) => {
-		const { value } = event.target;
+		const {value} = event.target;
 		
 		startTransition(() => {
 			setInputValue(value);
@@ -33,14 +36,22 @@ const Input: FC = () => {
 	
 	return (
 		<TextField
+			fullWidth={isTextFieldFullWidth}
 			label="Search by title"
-			size="small"
-			variant="outlined"
+			size={isTextFieldFullWidth ? 'medium' : 'small'}
+			variant="standard"
 			value={inputValue}
 			onChange={onSearchValueChange}
 			inputProps={{
-			'data-testid': 'input'
-		}}
+				'data-testid': 'input'
+			}}
+			InputProps={{
+				startAdornment: (
+					<InputAdornment position="start">
+						<Search/>
+					</InputAdornment>
+				)
+			}}
 		/>
 	)
 };

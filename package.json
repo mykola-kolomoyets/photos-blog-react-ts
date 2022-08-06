@@ -1,7 +1,7 @@
 {
   "name": "photos-gallery",
   "version": "0.6.8",
-  "homepage": "https://mykola-kolomoyets.github.io/",
+  "homepage": "https://mykola-kolomoyets.github.io/photos-blog-react-ts",
   "private": true,
   "dependencies": {
     "@emotion/react": "^11.10.0",

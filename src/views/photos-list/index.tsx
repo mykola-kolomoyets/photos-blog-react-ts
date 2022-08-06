@@ -7,21 +7,11 @@ import Input from '../../components/ui/input';
 import PhotosList from '../../components/layout/photos-list';
 
 const PhotosListView: FC = () => {
-	const {getPhotos, limit, isFetching, searchValue, searchPhotos, setLimit} = usePhotosStore();
-	
-	const [isDebounceFetching, setIsDebounceFetching] = useState(false);
-	
-
+	const {getPhotos, limit, searchValue, searchPhotos, setLimit} = usePhotosStore();
 	
 	useEffect(() => {
 		searchValue ? searchPhotos() : getPhotos();
 	}, [limit, searchValue]);
-	
-	useEffect(() => {
-		setTimeout(() => {
-			setIsDebounceFetching(isFetching);
-		}, isFetching ? 0 : 350);
-	}, [isFetching]);
 	
 	useEffect(() => {
 		setLimit(6);
@@ -36,9 +26,7 @@ const PhotosListView: FC = () => {
 			<Input/>
 			
 			<section>
-				{isDebounceFetching ? <CircularProgress/> : (
-					<PhotosList/>
-				)}
+				<PhotosList/>
 			</section>
 		</Fragment>
 	)

@@ -1,0 +1,17 @@
+.scrollToTop {
+  position: fixed;
+
+  bottom: 16px;
+  left: calc(100vw - 44px - 32px);
+
+
+  button {
+    padding: 8px;
+
+    border-radius: 50%;
+    border: 2px solid #c3c3c3;
+
+    background-color: #d8d8d8;
+
+  }
+}

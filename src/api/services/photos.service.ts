@@ -12,4 +12,6 @@ export default class PhotosService {
 		
 		return api.get(`/photos${query}`);
 	}
+	
+	public static getPhoto = (id: string): Promise<AxiosResponse<Photo>> => api.get(`/photos/${id}`);
 }

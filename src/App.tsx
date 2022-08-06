@@ -1,43 +1,19 @@
-import React, {FC, useEffect} from 'react';
-import {CircularProgress, Typography} from '@mui/material';
-
-import usePhotosStore from './store/usePhotosStore';
+import React, {FC} from 'react';
 
 import Header from './components/layout/header';
 import Container from './components/layout/container';
-import PhotosList from './components/layout/photos-list';
-
-import Input from './components/ui/input';
+import Router from './components/router';
 
 import './App.scss';
 
-const App: FC = () => {
-	const {getPhotos, limit, isFetching, searchValue, searchPhotos} = usePhotosStore();
-	
-	useEffect(() => {
-		searchValue ? searchPhotos() : getPhotos();
-	}, [limit, searchValue]);
-	
-	return (
-		<main>
-			<Header/>
-			
-			<Container>
-				<Typography align="center" variant="h5">
-					Photos
-				</Typography>
-				
-				<Input/>
-				
-				<section>
-					{isFetching ? <CircularProgress/> : (
-						<PhotosList/>
-					)}
-				</section>
-			
-			</Container>
-		</main>
-	);
-}
+const App: FC = () => (
+	<main>
+		<Header/>
+		
+		<Container>
+			<Router />
+		</Container>
+	</main>
+);
 
 export default App;

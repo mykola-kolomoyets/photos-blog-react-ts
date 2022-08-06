@@ -18,8 +18,6 @@ const Input: FC = () => {
 	const onSearchValueChange = (event: ChangeEvent<HTMLInputElement>) => {
 		const { value } = event.target;
 		
-		setInputValue(value);
-		
 		startTransition(() => {
 			setInputValue(value);
 		});

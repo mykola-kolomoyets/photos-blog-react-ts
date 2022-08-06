@@ -1,20 +1,25 @@
 import {FC} from 'react';
+import {useNavigate} from 'react-router-dom';
 import {Typography} from '@mui/material';
 
 import usePhotosStore from '../../../store/usePhotosStore';
 
-import {centerButtonStyles, limitStep} from './photos-list.constants';
-
-import styles from './photos-list.module.scss';
 import Grid from '../grid';
 import Button from '../../ui/button';
 import PhotoItem from '../../ui/photo-item';
-import {Photo} from '../../../utils/types/photos';
+
+import {limitStep} from './photos-list.constants';
+
+import styles from './photos-list.module.scss';
 
 const PhotosList: FC = () => {
 	const {photos, limit, setLimit, searchValue, filteredLength, total} = usePhotosStore();
 	
+	const navigate = useNavigate();
+	
 	const onShowMoreClick = () => setLimit(limit + limitStep);
+	
+	const onPhotoCLick = (id: string) => navigate(`/${id}`);
 	
 	if (!photos.length) {
 		return (
@@ -34,7 +39,7 @@ const PhotosList: FC = () => {
 	
 	return (
 		<section className={styles.list}>
-			{searchValue && (
+			{searchValue && !!searchValue.trim() && (
 				<Typography variant="body1">
 					Found {filteredLength} photo{isPluralPhotos ? 's' : ''} from {total}
 				</Typography>
@@ -42,7 +47,7 @@ const PhotosList: FC = () => {
 			
 			<Grid
 				items={photos}
-				renderItem={(photo) => <PhotoItem data={photo} />}
+				renderItem={(photo) => <PhotoItem data={photo} onClick={() => onPhotoCLick(photo.id)}/>}
 				keyExtractor={(photo) => photo.id}
 			/>
 			

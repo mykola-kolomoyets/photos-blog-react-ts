@@ -8,3 +8,7 @@ export type Photo = {
 	url: string;
 	thumbnailUrl: string;
 }
+
+export type PhotoDetails = Photo & {
+	albumTitle: string;
+}

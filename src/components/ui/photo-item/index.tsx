@@ -16,9 +16,10 @@ import {mockImg} from './photo-item.constants';
 
 type PhotoItemProps = {
 	data: Photo;
+	onClick: () => void;
 }
-const PhotoItem: FC<PhotoItemProps> = ({data}) => (
-	<Paper sx={{height: '100%'}} elevation={4}>
+const PhotoItem: FC<PhotoItemProps> = ({data, onClick}) => (
+	<Paper sx={{height: '100%'}} elevation={4} onClick={onClick}>
 		<Card data-testid="photo-item" sx={{
 			boxShadow: 'none'
 		}}>

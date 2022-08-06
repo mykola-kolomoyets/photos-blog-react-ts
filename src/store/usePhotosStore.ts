@@ -1,7 +1,8 @@
 import createStore from 'zustand';
 
-import {Photo} from '../utils/types/photos';
+import {Photo, PhotoDetails} from '../utils/types/photos';
 import PhotosService from '../api/services/photos.service';
+import AlbumsService from '../api/services/albums.service';
 
 interface PhotosStore {
 	/**
@@ -9,6 +10,7 @@ interface PhotosStore {
 	 */
 	limit: number;
 	photos: Photo[];
+	chosenPhotoDetails: PhotoDetails | null;
 	isFetching: boolean;
 	searchValue: string;
 	total: number;
@@ -19,17 +21,23 @@ interface PhotosStore {
 	 */
 	setLimit: (limit: number) => void;
 	setSearchValue: (searchValue: string) => void;
+	
 	getPhotos: () => void;
+	getPhoto: (id: string) => void;
 	searchPhotos: () => void;
 }
 
-export const initialState: Omit<PhotosStore, 'setLimit' | 'getPhotos' | 'searchPhotos' | 'setSearchValue'> = {
+type PhotosStoreFields = Omit<PhotosStore,
+	'setLimit' | 'getPhotos' | 'searchPhotos' | 'setSearchValue' | 'getPhoto'>;
+
+export const initialState: PhotosStoreFields = {
 	limit: 6,
 	photos: [],
 	isFetching: false,
 	searchValue: '',
 	total: 0,
-	filteredLength: 0
+	filteredLength: 0,
+	chosenPhotoDetails: null
 }
 
 const usePhotosStore = createStore<PhotosStore>((set, get) => ({
@@ -66,10 +74,35 @@ const usePhotosStore = createStore<PhotosStore>((set, get) => ({
 			.finally(() => set({isFetching: false}));
 	},
 	
-	searchPhotos: () => {
+	getPhoto: async (id) => {
 		set({isFetching: true});
 		
+		PhotosService.getPhoto(id)
+			.then(({data}) => data)
+			.then(async (data) => {
+				const chosenPhotoDetails: PhotoDetails = {...data, albumTitle: ''};
+				
+				await AlbumsService.getAlbum(data.albumId)
+					.then(({data: {title: albumTitle}}) => {
+						chosenPhotoDetails.albumTitle = albumTitle;
+					});
+				
+				set({chosenPhotoDetails});
+			})
+			.catch(err => {
+				console.log(err);
+				
+				set({chosenPhotoDetails: null})
+			})
+			.finally(() => set({isFetching: false}));
+	},
+	
+	searchPhotos: () => {
 		const {limit, searchValue} = get();
+		
+		if (!searchValue || !searchValue.trim().length) return;
+		
+		set({isFetching: true});
 		
 		PhotosService.getPhotos()
 			.then(({data}) => {

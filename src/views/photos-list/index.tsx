@@ -1,4 +1,4 @@
-import React, {FC, Fragment, useEffect} from 'react';
+import React, {FC, Fragment, useEffect, useMemo, useState} from 'react';
 import {CircularProgress, Typography} from '@mui/material';
 
 import usePhotosStore from '../../store/usePhotosStore';
@@ -9,9 +9,19 @@ import PhotosList from '../../components/layout/photos-list';
 const PhotosListView: FC = () => {
 	const {getPhotos, limit, isFetching, searchValue, searchPhotos, setLimit} = usePhotosStore();
 	
+	const [isDebounceFetching, setIsDebounceFetching] = useState(false);
+	
+
+	
 	useEffect(() => {
 		searchValue ? searchPhotos() : getPhotos();
 	}, [limit, searchValue]);
+	
+	useEffect(() => {
+		setTimeout(() => {
+			setIsDebounceFetching(isFetching);
+		}, isFetching ? 0 : 350);
+	}, [isFetching]);
 	
 	useEffect(() => {
 		setLimit(6);
@@ -26,7 +36,7 @@ const PhotosListView: FC = () => {
 			<Input/>
 			
 			<section>
-				{isFetching ? <CircularProgress/> : (
+				{isDebounceFetching ? <CircularProgress/> : (
 					<PhotosList/>
 				)}
 			</section>

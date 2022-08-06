@@ -1,4 +1,4 @@
-import {FC} from 'react';
+import {FC, useState} from 'react';
 
 import Card from '@mui/material/Card';
 import CardMedia from '@mui/material/CardMedia';
@@ -18,29 +18,43 @@ type PhotoItemProps = {
 	data: Photo;
 	onClick: () => void;
 }
-const PhotoItem: FC<PhotoItemProps> = ({data, onClick}) => (
-	<Paper sx={{height: '100%'}} elevation={4} onClick={onClick}>
-		<Card data-testid="photo-item" sx={{
-			boxShadow: 'none'
-		}}>
-			<CardMedia
-				component="img"
-				// image={data.url}
-				// src={data.url}
-				image={mockImg}
-				src={mockImg}
-				height={200}
-				alt={sliceString(data.title, 10)}
-			/>
-			
-			<CardContent>
-				<Typography variant="body2">
-					{data.title}
-				</Typography>
-			</CardContent>
-		</Card>
+const PhotoItem: FC<PhotoItemProps> = ({data, onClick}) => {
+	const [elevation, setElevation] = useState(3);
 	
-	</Paper>
-);
+	const onMouseOver = () => setElevation(6);
+	const onMouseOut = () => setElevation(3);
+	
+	
+	return (
+		<Paper
+			sx={{height: '100%', cursor: 'pointer'}}
+			elevation={elevation}
+			onClick={onClick}
+			onMouseOver={onMouseOver}
+			onMouseOut={onMouseOut}
+		>
+			<Card data-testid="photo-item" sx={{
+				boxShadow: 'none'
+			}}>
+				<CardMedia
+					component="img"
+					// image={data.url}
+					// src={data.url}
+					image={mockImg}
+					src={mockImg}
+					height={200}
+					alt={sliceString(data.title, 10)}
+				/>
+				
+				<CardContent>
+					<Typography variant="body2">
+						{data.title}
+					</Typography>
+				</CardContent>
+			</Card>
+		
+		</Paper>
+	);
+}
 
 export default PhotoItem;

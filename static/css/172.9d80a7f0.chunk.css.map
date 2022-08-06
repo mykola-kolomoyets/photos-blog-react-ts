@@ -1,0 +1,1 @@
+{"version":3,"file":"static/css/172.9d80a7f0.chunk.css","mappings":"AAAA,yBACE","sources":["components/layout/photos-list/photos-list.module.scss"],"sourcesContent":[".list {\r\n  margin: 16px 0;\r\n}"],"names":[],"sourceRoot":""}

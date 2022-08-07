@@ -36,4 +36,4 @@ const ScrollToTop: FC<ScrollToTopProps> = ({breakpoint}) => {
 	);
 };
 
-export default ScrollToTop;
+export {ScrollToTop};

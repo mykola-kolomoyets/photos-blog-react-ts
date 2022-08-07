@@ -1,7 +1,6 @@
-import api from '../config';
+import api from '@api/config';
 
-import {Photo} from '../../utils/types/photos';
-import {Response} from '../../utils/types/services';
+import {Photo, Response} from '@types';
 
 export default class PhotosService {
 	private static defaultLimit = 6;

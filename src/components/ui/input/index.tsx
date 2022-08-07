@@ -3,10 +3,11 @@ import {useMediaQuery, TextField, InputAdornment} from '@mui/material';
 import {TextFieldProps} from '@mui/material/TextField/TextField';
 import {Search} from '@mui/icons-material';
 
-import usePhotosStore from '../../../store/usePhotosStore';
+import {usePhotosStore} from '@store/usePhotosStore';
 
-import useDebounce from '../../../utils/hooks/useDebounce';
-import {limitStep} from '../../layout/photos-list/photos-list.constants';
+import {useDebounce} from '@hooks';
+
+import {limitStep} from '@layout/photos-list/photos-list.constants';
 
 import {defaultInputProps} from './input.constants';
 
@@ -35,7 +36,7 @@ const Input: FC = () => {
 		size: isTextFieldFullWidth ? 'medium' : 'small',
 		value: inputValue,
 		onChange: onSearchValueChange
-	}),  [isTextFieldFullWidth, inputValue]);
+	}), [isTextFieldFullWidth, inputValue]);
 	
 	useEffect(() => {
 		setSearchValue(searchValue);
@@ -59,4 +60,4 @@ const Input: FC = () => {
 	)
 };
 
-export default Input;
+export {Input};

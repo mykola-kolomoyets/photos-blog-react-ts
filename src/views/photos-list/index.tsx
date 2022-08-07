@@ -1,10 +1,10 @@
 import React, {FC, Fragment, useEffect} from 'react';
 import {Typography} from '@mui/material';
 
-import usePhotosStore from '../../store/usePhotosStore';
+import {usePhotosStore} from '@store/usePhotosStore';
 
-import Input from '../../components/ui/input';
-import PhotosList from '../../components/layout/photos-list';
+import {Input} from '@ui';
+import {PhotosList} from '@layout';
 
 const PhotosListView: FC = () => {
 	const {getPhotos, limit, searchValue, searchPhotos, setLimit} = usePhotosStore();

@@ -3,7 +3,7 @@ import {MemoryRouter} from 'react-router-dom';
 import {render, screen, waitFor} from '@testing-library/react';
 import userEvent from '@testing-library/user-event'
 
-import usePhotosStore, {initialState} from '../store/usePhotosStore';
+import {initialState, usePhotosStore} from '@store/usePhotosStore';
 
 import App from './../App';
 
@@ -14,7 +14,7 @@ describe('Photos searching', () => {
 	
 	test('search for 2 photos with "reprehenderit est" title', async () => {
 		await render((
-			<MemoryRouter initialEntries={['/']}>
+			<MemoryRouter initialEntries={['/photos-blog-react-ts']}>
 				<App/>
 			</MemoryRouter>
 		));
@@ -40,7 +40,7 @@ describe('Photos searching', () => {
 	
 	test('search for photos with more then 6 results', async () => {
 		await render((
-			<MemoryRouter initialEntries={['/']}>
+			<MemoryRouter initialEntries={['/photos-blog-react-ts']}>
 				<App/>
 			</MemoryRouter>
 		));
@@ -65,7 +65,7 @@ describe('Photos searching', () => {
 	
 	test('search for photo with non-existing title', async () => {
 		await render((
-			<MemoryRouter initialEntries={['/']}>
+			<MemoryRouter initialEntries={['/photos-blog-react-ts']}>
 				<App/>
 			</MemoryRouter>
 		));

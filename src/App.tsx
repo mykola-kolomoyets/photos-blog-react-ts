@@ -1,11 +1,10 @@
 import React, {FC} from 'react';
 
-import useWindowSize from './utils/hooks/useWidowSize';
+import {useWindowSize} from '@hooks';
 
-import ScrollToTop from './components/ui/scroll-to-top';
-import Header from './components/layout/header';
-import Container from './components/layout/container';
-import Router from './components/router';
+import {ScrollToTop} from '@ui';
+import {Header, ContainerComponent as Container} from '@layout';
+import Router from '@router';
 
 import styles from './App.module.scss';
 

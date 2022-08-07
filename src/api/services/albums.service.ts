@@ -1,7 +1,6 @@
-import api from '../config';
+import api from '@api/config';
 
-import {Album} from '../../utils/types/albums';
-import {Response} from '../../utils/types/services';
+import {Album, Response} from '@types';
 
 export default class AlbumsService {
 	public static getAlbum = (id: string): Response<Album> => api.get(`/albums/${id}`);

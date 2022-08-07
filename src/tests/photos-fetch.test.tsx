@@ -3,7 +3,7 @@ import {render, screen, waitFor} from '@testing-library/react';
 import {MemoryRouter} from 'react-router-dom';
 import userEvent from '@testing-library/user-event'
 
-import usePhotosStore, {initialState} from '../store/usePhotosStore';
+import {initialState, usePhotosStore} from '@store/usePhotosStore';
 
 import App from './../App';
 
@@ -14,7 +14,7 @@ describe('Photos fetching', () => {
 	
 	test('fetch first 6 photos onmount', async () => {
 		await render((
-			<MemoryRouter initialEntries={['/']}>
+			<MemoryRouter initialEntries={['/photos-blog-react-ts']}>
 				<App/>
 			</MemoryRouter>
 		));
@@ -30,7 +30,7 @@ describe('Photos fetching', () => {
 	
 	test('fetch next 6 photos on button click', async () => {
 		await render((
-			<MemoryRouter initialEntries={['/']}>
+			<MemoryRouter initialEntries={['/photos-blog-react-ts']}>
 				<App/>
 			</MemoryRouter>
 		));

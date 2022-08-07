@@ -1,13 +1,13 @@
 import {FC, MouseEvent} from 'react';
 import {Button} from '@mui/material';
 
-import {centerButtonStyles} from '../../layout/photos-list/photos-list.constants';
+import {centerButtonStyles} from '@layout/photos-list/photos-list.constants';
 
 type ButtonProps = {
 	title: string;
 	onClick: () => void;
 }
-const ButtonComponent: FC<ButtonProps> = ({ title, onClick }) => {
+const ButtonComponent: FC<ButtonProps> = ({title, onClick}) => {
 	const onButtonClick = (event: MouseEvent<HTMLButtonElement>) => {
 		event.preventDefault();
 		
@@ -19,11 +19,11 @@ const ButtonComponent: FC<ButtonProps> = ({ title, onClick }) => {
 			variant="contained"
 			style={centerButtonStyles}
 			onClick={onButtonClick}
-			data-testid='show-more'
+			data-testid="show-more"
 		>
 			{title}
 		</Button>
 	);
 }
 
-export default ButtonComponent;
+export {ButtonComponent};

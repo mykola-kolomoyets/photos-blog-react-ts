@@ -1,13 +1,12 @@
-import {FC, useMemo, memo} from 'react';
+import {FC, useMemo} from 'react';
 import {useNavigate} from 'react-router-dom';
 import {Typography} from '@mui/material';
 
-import usePhotosStore from '../../../store/usePhotosStore';
+import {usePhotosStore} from '@store/usePhotosStore';
 
-import Grid from '../grid';
+import {ButtonComponent as Button, PhotoItem} from './../../ui';
+import {GridComponent as Grid} from './../';
 
-import Button from '../../ui/button';
-import PhotoItem from '../../ui/photo-item';
 
 import {limitStep} from './photos-list.constants';
 
@@ -30,7 +29,7 @@ const PhotosList: FC = () => {
 	
 	const onShowMoreClick = () => setLimit(limit + limitStep);
 	
-	const onPhotoCLick = (id: string) => navigate(`/${id}`);
+	const onPhotoCLick = (id: string) => navigate(`/photos-blog-react-ts/${id}`);
 	
 	if (!photos.length) {
 		return (
@@ -68,4 +67,4 @@ const PhotosList: FC = () => {
 	)
 };
 
-export default memo(PhotosList);
+export {PhotosList};

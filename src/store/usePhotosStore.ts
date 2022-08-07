@@ -3,8 +3,9 @@ import createStore from 'zustand';
 import PhotosService from '../api/services/photos.service';
 import AlbumsService from '../api/services/albums.service';
 
-import {Photo, PhotoDetails} from '../utils/types/photos';
-import {sleep} from '../utils/functions';
+import {Photo, PhotoDetails} from '@types';
+
+import {sleep} from '@functions';
 
 interface PhotosStore {
 	/**
@@ -130,4 +131,4 @@ const usePhotosStore = createStore<PhotosStore>((set, get) => ({
 	}
 }));
 
-export default usePhotosStore;
+export {usePhotosStore};

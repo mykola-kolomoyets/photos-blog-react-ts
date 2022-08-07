@@ -30,4 +30,4 @@ const GridComponent = <P, >({items, renderItem, keyExtractor, isFetching}: GridP
 		)}
 	</Fragment>
 );
-export default GridComponent;
+export {GridComponent};

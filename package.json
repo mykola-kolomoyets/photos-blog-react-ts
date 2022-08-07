@@ -1,9 +1,10 @@
 {
   "name": "photos-gallery",
-  "version": "0.6.8",
+  "version": "0.7.8",
   "homepage": "https://mykola-kolomoyets.github.io/photos-blog-react-ts",
   "private": true,
   "dependencies": {
+    "@craco/craco": "^6.4.5",
     "@emotion/react": "^11.10.0",
     "@emotion/styled": "^11.10.0",
     "@mui/icons-material": "^5.8.4",
@@ -16,6 +17,8 @@
     "@types/react": "^18.0.0",
     "@types/react-dom": "^18.0.0",
     "axios": "^0.27.2",
+    "craco": "^0.0.3",
+    "craco-alias": "^3.0.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.3.0",
@@ -26,10 +29,10 @@
     "zustand": "^4.0.0"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject",
+    "start": "craco start",
+    "build": "craco build",
+    "test": "craco test",
+    "eject": "craco eject",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build"
   },

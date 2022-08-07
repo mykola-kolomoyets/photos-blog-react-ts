@@ -2,10 +2,11 @@ import {FC, Fragment, useEffect} from 'react';
 import {useNavigate, useParams} from 'react-router-dom';
 import {Box, CircularProgress, Grid, Typography} from '@mui/material';
 
-import usePhotosStore from '../../store/usePhotosStore';
+import {usePhotosStore} from '@store/usePhotosStore';
 
-import Button from '../../components/ui/button';
-import {mockImg} from '../../components/ui/photo-item/photo-item.constants';
+import {ButtonComponent as Button} from '@ui';
+
+import {mockImage} from '@assets/images';
 
 type PhotoDetailsViewParams = 'id';
 const PhotoDetailsView: FC = () => {
@@ -47,7 +48,7 @@ const PhotoDetailsView: FC = () => {
 							height: '100%',
 							width: '100%'
 						}}
-						src={mockImg}
+						src={mockImage}
 						// src={chosenPhotoDetails?.url}
 					/>
 				</Grid>

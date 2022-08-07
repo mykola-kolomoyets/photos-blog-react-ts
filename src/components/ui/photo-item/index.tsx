@@ -1,5 +1,5 @@
 import {FC, useState, MouseEvent} from 'react';
-import {Paper, Typography, Card, CardMedia, CardContent, Tooltip, Snackbar} from '@mui/material';
+import {Paper, Typography, Card, CardMedia, CardContent, Tooltip} from '@mui/material';
 
 import {Photo} from '@types';
 
@@ -14,23 +14,19 @@ import {mockImage} from '@assets/images';
 type PhotoItemProps = {
 	data: Photo;
 	onClick: () => void;
+	onTitleCopy: () => void;
 }
-const PhotoItem: FC<PhotoItemProps> = ({data, onClick}) => {
-	const [isNameCopied, setIsNameCopied] = useState(false);
+const PhotoItem: FC<PhotoItemProps> = ({data, onClick, onTitleCopy}) => {
 	const [elevation, setElevation] = useState(3);
 	
 	const onMouseOver = () => setElevation(6);
 	const onMouseOut = () => setElevation(3);
 	
-	const onNameCopy = async (event: MouseEvent<HTMLSpanElement>) => {
+	const onPhotoTitleCopyClick = (event: MouseEvent<HTMLSpanElement>) => {
 		event.stopPropagation();
 		
-		await navigator.clipboard.writeText(data.title);
-		
-		setIsNameCopied(true);
+		onTitleCopy();
 	}
-	
-	const onSnackbarClose = () => setIsNameCopied(false);
 	
 	return (
 		<Paper
@@ -55,19 +51,14 @@ const PhotoItem: FC<PhotoItemProps> = ({data, onClick}) => {
 				
 				<CardContent>
 					<Tooltip title="Click to copy" placement="top-start">
-						<Typography variant="body2" onClick={onNameCopy}>
+						<Typography variant="body2" onClick={onPhotoTitleCopyClick}>
 							{data.title}
 						</Typography>
 					</Tooltip>
 				</CardContent>
 			</Card>
-			
-			<Snackbar
-				open={isNameCopied}
-				autoHideDuration={3000}
-				onClose={onSnackbarClose}
-				message="Name copied"
-			/>
+		
+		
 		</Paper>
 	);
 }

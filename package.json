@@ -1,6 +1,6 @@
 {
   "name": "photos-gallery",
-  "version": "0.7.8",
+  "version": "0.7.9",
   "homepage": "https://mykola-kolomoyets.github.io/photos-blog-react-ts",
   "private": true,
   "dependencies": {

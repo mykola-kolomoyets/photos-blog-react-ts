@@ -1,12 +1,13 @@
-import {FC, useMemo} from 'react';
+import {FC, MouseEvent, useMemo, useState} from 'react';
 import {useNavigate} from 'react-router-dom';
 import {Typography} from '@mui/material';
 
 import {usePhotosStore} from '@store/usePhotosStore';
 
-import {ButtonComponent as Button, PhotoItem} from './../../ui';
-import {GridComponent as Grid} from './../';
+import {ButtonComponent as Button, PhotoItem, Snackbar} from '@ui';
+import {GridComponent as Grid} from '@layout';
 
+import {Photo} from '@types';
 
 import {limitStep} from './photos-list.constants';
 
@@ -23,6 +24,8 @@ const PhotosList: FC = () => {
 		setLimit
 	} = usePhotosStore();
 	
+	const [isPhotoTitleCopied, setIsPhotoTitleCopied] = useState(false);
+	
 	const navigate = useNavigate();
 	
 	const isPluralPhotos = useMemo(() => photos.length > 1, [photos]);
@@ -30,6 +33,14 @@ const PhotosList: FC = () => {
 	const onShowMoreClick = () => setLimit(limit + limitStep);
 	
 	const onPhotoCLick = (id: string) => navigate(`/photos-blog-react-ts/${id}`);
+	
+	const onPhotoTitleCopy = async (title: string) => {
+		await navigator.clipboard.writeText(title);
+		
+		setIsPhotoTitleCopied(true);
+	}
+	
+	const onSnackbarClose = () => setIsPhotoTitleCopied(false);
 	
 	if (!photos.length) {
 		return (
@@ -55,7 +66,13 @@ const PhotosList: FC = () => {
 			
 			<Grid
 				items={photos}
-				renderItem={(photo) => <PhotoItem data={photo} onClick={() => onPhotoCLick(photo.id)}/>}
+				renderItem={(photo) => (
+					<PhotoItem
+						data={photo}
+						onClick={() => onPhotoCLick(photo.id)}
+						onTitleCopy={() => onPhotoTitleCopy(photo.title)}
+					/>)
+				}
 				keyExtractor={(photo) => photo.id}
 				isFetching={isFetching}
 			/>
@@ -63,6 +80,14 @@ const PhotosList: FC = () => {
 			{photos.length >= limit ? (
 				<Button title="Show More" onClick={onShowMoreClick}/>
 			) : null}
+			
+			
+			<Snackbar
+				show={isPhotoTitleCopied}
+				onClose={onSnackbarClose}
+				text="Photo name was copied"
+				type="info"
+			/>
 		</section>
 	)
 };

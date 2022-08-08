@@ -39,6 +39,7 @@ const PhotosList: FC = () => {
 
 					<strong>{searchValue}</strong>
 
+					{' '}were not found...
 				</Typography>
 			</section>
 		)
@@ -55,8 +56,8 @@ const PhotosList: FC = () => {
 			<Grid
 				items={photos}
 				renderItem={(photo) => (
-					<PhotoItem 
-						data={photo} 
+					<PhotoItem
+						data={photo}
 						onClick={() => onPhotoCLick(photo.id)}
 					/>)
 				}

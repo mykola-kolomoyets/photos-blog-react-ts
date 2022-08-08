@@ -4,6 +4,7 @@ import {Typography} from '@mui/material';
 import {usePhotosStore} from '@store/usePhotosStore';
 
 import {Input} from '@ui';
+
 import {PhotosList} from '@layout';
 
 const PhotosListView: FC = () => {
